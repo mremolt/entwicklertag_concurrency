@@ -19,17 +19,15 @@ var processResponse = function(response) {
     doc.push(data);
   }).on('end', function() {
     var xml = doc.join("\n");
-    var result = analyzeXml(xml);
-    results.push(result);
-    if (results.length % 500 === 0) { console.log(results.length); }
-  });
-};
 
-var analyzeXml = function(xml) {
-  // just burn some cpu cycles
-  var e = new Date().getTime() + (10);
-  while (new Date().getTime() <= e) {}
-  return xml.length;
+    parseString(xml, function (err, result) {
+      if (err) {
+        result = [false, xml];
+      }
+      results.push(result);
+      if (results.length % 500 === 0) { console.log(results.length); }
+    });
+  });
 };
 
 var download_url = 'http://localhost/visono/file_list.txt';

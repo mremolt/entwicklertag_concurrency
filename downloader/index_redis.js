@@ -1,3 +1,5 @@
+// jshint node:true, esnext: true
+
 'use strict';
 const url = require('url');
 const http = require('http');
@@ -37,7 +39,7 @@ var finish = function() {
     console.log("written: ", replies.length);
     client.quit();
   });
-}
+};
 
 var download_url = 'http://localhost/visono/file_list.txt';
 var text = [];
@@ -50,5 +52,4 @@ http.get(download_url, function(res) {
     downloadItem(fileName);
   });
 });
-
 

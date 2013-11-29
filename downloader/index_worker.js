@@ -1,3 +1,5 @@
+// jshint node:true, esnext: true
+
 'use strict';
 const url = require('url');
 const http = require('http');
@@ -39,10 +41,10 @@ workers.push(cp.fork(__dirname + '/xml_analyzer.js'));
 _(workers).each(function(child) {
   child.on('message', function(data) {
     results.push(data);
-    if (results.length % 500 == 0) { console.log(results.length); }
+    if (results.length % 500 === 0) { console.log(results.length); }
     if (results.length >= 20000) {
       finish(results, workers);
-    };
+    }
   });
 });
 
