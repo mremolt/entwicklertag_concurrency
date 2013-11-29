@@ -1,0 +1,19 @@
+{
+  "name": "downloader",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "lazy": "~1.0.11",
+    "webworker-threads": "~0.4.7",
+    "lodash": "~2.4.0",
+    "xml2js": "~0.4.0",
+    "redis": "~0.9.1",
+    "hiredis": "~0.1.15"
+  }
+}
