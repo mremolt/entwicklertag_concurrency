@@ -1,3 +1,7 @@
+// jshint node:true, esnext: true
+//
+// node --harmony index_worker_redis.js  90,75s user 5,28s system 170% cpu 56,245 total
+
 'use strict';
 const url = require('url');
 const http = require('http');
@@ -5,8 +9,6 @@ const http = require('http');
 const lazy = require('lazy');
 const cp = require('child_process');
 const _ = require('lodash');
-const redis = require("redis");
-const client = redis.createClient();
 
 var runs = 100000;
 var results = [];
@@ -28,7 +30,6 @@ var processResponse = function(response) {
 
 var finish = function(results, workers) {
   console.log("cleaning");
-  client.quit();
   _(workers).each(function(child) {
     child.kill();
   });
@@ -39,14 +40,13 @@ workers.push(cp.fork(__dirname + '/xml_store.js'));
 workers.push(cp.fork(__dirname + '/xml_store.js'));
 workers.push(cp.fork(__dirname + '/xml_store.js'));
 workers.push(cp.fork(__dirname + '/xml_store.js'));
-workers.push(cp.fork(__dirname + '/xml_store.js'));
 
 _(workers).each(function(child) {
   child.on('message', function(data) {
     results.push(data);
     if (results.length >= runs) {
       finish(results, workers);
-    };
+    }
   });
 });
 

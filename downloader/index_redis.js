@@ -1,4 +1,6 @@
 // jshint node:true, esnext: true
+//
+// node --harmony index_redis.js  42,35s user 2,23s system 101% cpu 44,078 total
 
 'use strict';
 const url = require('url');
@@ -30,7 +32,6 @@ var processResponse = function(response) {
     client.hset('xml_files', key, xml);
     results += 1;
     if (results >= runs) { finish(); }
-    // console.log("Wrote", key);
   });
 };
 
@@ -42,8 +43,6 @@ var finish = function() {
 };
 
 var download_url = 'http://localhost/visono/file_list.txt';
-var text = [];
-
 http.globalAgent.maxSockets = 20;
 
 http.get(download_url, function(res) {

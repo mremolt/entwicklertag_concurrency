@@ -1,4 +1,9 @@
 // jshint node:true, esnext: true
+//
+// No while
+// node --harmony index.js  4,35s user 0,32s system 101% cpu 4,609 total
+// With while burner
+// node --harmony index.js  41,37s user 0,10s system 100% cpu 41,201 total
 
 'use strict';
 const url = require('url');
@@ -27,7 +32,7 @@ var processResponse = function(response) {
 
 var analyzeXml = function(xml) {
   // just burn some cpu cycles
-  var e = new Date().getTime() + (10);
+  var e = new Date().getTime() + (1);
   while (new Date().getTime() <= e) {}
   return xml.length;
 };

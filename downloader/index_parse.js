@@ -1,4 +1,6 @@
 // jshint node:true, esnext: true
+//
+// node --harmony index_parse.js  392,03s user 2,73s system 100% cpu 6:33,07 total
 
 'use strict';
 const url = require('url');

@@ -1,4 +1,6 @@
 // jshint node:true, esnext: true
+//
+// node --harmony index_worker.js  235,17s user 2,32s system 262% cpu 1:30,64 total
 
 'use strict';
 const url = require('url');
@@ -6,7 +8,6 @@ const http = require('http');
 const lazy = require('lazy');
 const cp = require('child_process');
 const _ = require('lodash');
-const parseString = require('xml2js').parseString;
 
 var results = [];
 
@@ -34,6 +35,7 @@ var finish = function(results, workers) {
 };
 
 var workers = [];
+workers.push(cp.fork(__dirname + '/xml_analyzer.js'));
 workers.push(cp.fork(__dirname + '/xml_analyzer.js'));
 workers.push(cp.fork(__dirname + '/xml_analyzer.js'));
 workers.push(cp.fork(__dirname + '/xml_analyzer.js'));
